@@ -3,7 +3,7 @@ import path from 'path'
 import internalIP from 'internal-ip'
 
 import {createExpressServer} from './express'
-import {authRouter} from './routers'
+import {authRouter, uploadFilesRouter} from './routers'
 
 const port = 4000
 const publicDirPath = path.join(process.cwd(), 'public')
@@ -20,5 +20,6 @@ function runServer(ip: string | undefined) {
   app
     .get('/', (req, res) => res.json({message: 'Hello World!'}))
     .use('/auth', authRouter())
+    .use('/upload', uploadFilesRouter(ip, port))
     .listen(port, () => console.log(`server started at http://${ip}:${port}`))
 }
