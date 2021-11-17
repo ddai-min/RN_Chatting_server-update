@@ -50,8 +50,10 @@ export const authRouter = () => {
             name: decoded.name,
             message: `환영합니다. ${decoded.name}님.`
           })
-      } catch (e) {
-        res.json({success: false, message: e.message})
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          return res.json({success: false, message: e.message})
+        }
       }
     })
 }
