@@ -35,13 +35,13 @@ export const authRouter = () => {
         if (email !== decoded.email) {
           res.json({
             success: false,
-            message: `죄송합니다. 누구신지 모르겠어요.`
+            message: `일치하는 회원정보가 없습니다.`
           })
         }
         if (password !== decoded.password) {
           res.json({
             success: false,
-            message: `패스워드가 틀립니다.`
+            message: `패스워드가 일치하지 않습니다.`
           })
         } else
           res.json({
