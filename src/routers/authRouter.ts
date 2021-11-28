@@ -1,5 +1,4 @@
 import {Router} from 'express'
-
 import {IJWTDecoded} from './IJWTDecoded'
 import * as U from '../utils'
 
