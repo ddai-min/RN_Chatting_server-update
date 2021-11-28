@@ -6,7 +6,12 @@ export const authRouter = () => {
   const router = Router()
   return router
     .post('/signup', async (req, res) => {
-      const {name, email, password} = req.body
+      const {
+        name,
+        email,
+        password,
+        category: {one, two, three}
+      } = req.body
       console.log(
         'signup',
         'name:',
@@ -14,10 +19,14 @@ export const authRouter = () => {
         'email:',
         email,
         'password:',
-        password
+        password,
+        'category:',
+        one,
+        two,
+        three
       )
       const jwt = await U.jwtSign(
-        {email, name, password, provider: 'local'},
+        {email, name, password, category: {one, two, three}, provider: 'local'},
         {expiresIn: '9999 years'}
       )
       res.json({jwt})
