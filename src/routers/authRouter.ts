@@ -7,7 +7,15 @@ export const authRouter = () => {
   return router
     .post('/signup', async (req, res) => {
       const {name, email, password} = req.body
-      console.log('signup', name, email, password)
+      console.log(
+        'signup',
+        'name:',
+        name,
+        'email:',
+        email,
+        'password:',
+        password
+      )
       const jwt = await U.jwtSign(
         {email, name, password, provider: 'local'},
         {expiresIn: '9999 years'}
@@ -29,8 +37,14 @@ export const authRouter = () => {
       }
       try {
         const decoded = await U.jwtVerify<IJWTDecoded>(jwt)
-        console.log('email', email, decoded.email)
-        console.log('password', password, decoded.password)
+        console.log('login', 'email:', email, 'decoded email:', decoded.email)
+        console.log(
+          'login',
+          'password:',
+          password,
+          'decoded password:',
+          decoded.password
+        )
         if (email !== decoded.email) {
           res.json({
             success: false,
